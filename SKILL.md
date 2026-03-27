@@ -1,21 +1,51 @@
 ---
 name: x-algorithm-explorer
-description: Explore and analyze X (Twitter) Recommendation Algorithm codebase. Use when working with the X algorithm repository to understand architecture, navigate components, analyze recommendation systems, or explain how the For You Timeline and other product surfaces work. Helps with understanding SimClusters, TwHIN, GraphJet, home-mixer, heavy-ranker, and other core components.
+version: 2.0.0
+author: KevPH2026
+description: |
+  Explore and analyze X (Twitter) Recommendation Algorithm codebase.
+  
+  Use this skill when working with the X algorithm repository to:
+  - Understand overall architecture
+  - Navigate components (SimClusters, TwHIN, GraphJet)
+  - Analyze recommendation systems
+  - Explain For You Timeline construction
+  - Understand home-mixer, heavy-ranker, and other core components
+
+keywords:
+  - twitter
+  - x-algorithm
+  - recommendation-system
+  - machine-learning
+  - simclusters
+  - graphjet
+  - home-mixer
+
+install: ./install.sh
+homepage: https://github.com/KevPH2026/x-algorithm-explorer
+license: AGPL-3.0
 ---
 
 # X Algorithm Explorer
 
-Skill for exploring and understanding X (formerly Twitter) Recommendation Algorithm.
+OpenClaw Skill for exploring X (formerly Twitter) Recommendation Algorithm.
 
-## Overview
+## Quick Start
 
-This skill helps navigate and analyze the open-source X Recommendation Algorithm repository, which powers the For You Timeline, Search, Explore, and Notifications.
+After installation, ask your agent:
 
-## Architecture Components
+```
+"Explain how X's recommendation algorithm works"
+"What is SimClusters?"
+"How does the For You Timeline get constructed?"
+"Show me the components of home-mixer"
+```
+
+## Architecture Overview
 
 ### Core Data Services
 - **tweetypie**: Core service for reading/writing post data
-- **unified-user-actions**: Real-time stream of user actions
+- **unified-user-actions**: Real-time stream of user actions  
 - **user-signal-service**: Explicit (likes, replies) and implicit (profile visits, clicks) signals
 
 ### Machine Learning Models
@@ -36,70 +66,62 @@ This skill helps navigate and analyze the open-source X Recommendation Algorithm
 - **pushservice**: Recommendation service for notifications
 - **tweet-mixer**: Out-of-Network tweet candidates
 
-## Quick Navigation
-
-### Understanding a Component
-1. Check references/architecture.md for component overview
-2. Look for README.md in the component's directory
-3. Review source code in src/ directories
-
-### Analyzing the For You Timeline
-1. Start with home-mixer/ for the main service
-2. Check heavy-ranker for ranking logic
-3. Review candidate sources (UTEG, search-index)
-4. Understand visibility-filters for content filtering
-
-### Working with Graph-Based Recommendations
-1. GraphJet framework in user_tweet_entity_graph
-2. graph-feature-service for pairwise features
-3. recos-injector for streaming event processing
-
-## Key Files to Reference
-
-- [README.md](references/README.md) - Full repository documentation
-- [ARCHITECTURE.md](references/ARCHITECTURE.md) - System architecture details (if exists)
-- Component READMEs in individual directories
-
-## Common Tasks
-
-### Explain How For You Timeline Works
-Read home-mixer/README.md and trace through:
-1. Candidate sourcing (search-index + UTEG + FRS)
-2. Light ranking (earlybird)
-3. Heavy ranking (neural network)
-4. Mixing and filtering (home-mixer + visibility-filters)
-
-### Understand Recommendation Ranking
-Check heavy-ranker and light-ranker components:
-- Features used for ranking
-- Model architecture
-- Scoring mechanisms
-
-### Analyze Content Filtering
-Review visibilitylib/ for:
-- Hard filters (legal compliance)
-- Soft filters (quality, trust)
-- Downranking mechanisms
-
-## Code Structure
+## For You Timeline Flow
 
 ```
-the-algorithm/
-├── home-mixer/          # Main timeline service
-├── product-mixer/       # Framework for content feeds
-├── recos-injector/      # Event processor for GraphJet
-├── graph-feature-service/ # Pairwise user features
-├── follow-recommendations-service/ # Account recommendations
-├── trust_and_safety_models/ # Content safety
-├── visibilitylib/       # Content filtering
-├── navi/                # ML model serving (Rust)
-├── twml/                # Legacy ML framework (TensorFlow v1)
-└── src/                 # Source code
-    ├── scala/com/twitter/
-    │   ├── simclusters_v2/    # SimClusters
-    │   ├── recos/             # Recommendation algorithms
-    │   │   └── user_tweet_entity_graph/  # GraphJet
-    │   └── interaction_graph/ # Real graph
-    └── python/twitter/
-        └── deepbird/projects/timelines/  # Ranking models
+1. Candidate Sourcing
+   ├─ search-index (In-Network ~50%)
+   ├─ UTEG/GraphJet (Out-of-Network)
+   └─ FRS (Account recommendations)
+
+2. Light Ranking (earlybird)
+   └─ Initial filtering
+
+3. Heavy Ranking (heavy-ranker)
+   └─ Neural network scoring
+
+4. Mixing & Filtering
+   ├─ home-mixer (blend sources)
+   └─ visibility-filters (safety/quality)
 ```
+
+## Common Queries
+
+### Understanding Components
+- "Explain SimClusters and how it works"
+- "What is the purpose of home-mixer?"
+- "How does GraphJet enable real-time recommendations?"
+
+### Architecture Questions
+- "Walk me through the For You Timeline construction"
+- "What are the different ranking stages?"
+- "How are candidates sourced?"
+
+### Technical Deep Dives
+- "Explain the heavy-ranker neural network"
+- "What signals does TwHIN use?"
+- "How does visibility filtering work?"
+
+## File References
+
+- [references/README.md](references/README.md) - Full repository documentation
+- [references/home-mixer.md](references/home-mixer.md) - Timeline service
+- [references/product-mixer.md](references/product-mixer.md) - Feed framework
+- [references/RETREIVAL_SIGNALS.md](references/RETREIVAL_SIGNALS.md) - Signal types
+
+## External Resources
+
+- [X Algorithm Blog Post](https://blog.x.com/engineering/en_us/topics/open-source/2023/twitter-recommendation-algorithm)
+- [Original Repository](https://github.com/twitter/the-algorithm)
+
+## Changelog
+
+### v2.0.0
+- Added one-click install script
+- Added package.sh for .skill file generation
+- Updated documentation with quick start guide
+- Added architecture diagrams
+
+### v1.0.0
+- Initial release
+- Basic component documentation
