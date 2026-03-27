@@ -1,145 +1,211 @@
-# X Algorithm Explorer
+# X Viral Engine
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/KevPH2026/x-algorithm-explorer)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/KevPH2026/x-algorithm-explorer)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-green.svg)](https://openclaw.ai)
 [![License](https://img.shields.io/badge/license-AGPL--3.0-orange.svg)](LICENSE)
 
-一个 **OpenClaw Agent Skill**，帮助 AI 助手理解和导航 X (Twitter) 的开源推荐算法代码库。
+> **理解 X 算法 → 反向工程 → 生成算法喜欢的内容**
+
+基于 X (Twitter) 推荐算法反向工程的 **Viral 内容生成器**。
 
 ## 🚀 一键安装
-
-### 方式 1：自动安装（推荐）
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/KevPH2026/x-algorithm-explorer/main/install.sh | bash
 ```
 
-### 方式 2：OpenClaw CLI
+## 💡 使用方法
 
-```bash
-openclaw skills install KevPH2026/x-algorithm-explorer
+安装后，直接对你的 Agent 说：
+
+### 生成 Viral 内容
+```
+"给我生成一个 viral X 帖子"
+"写个能火的推文"
+"关于 [AI 工具] 的 viral 帖子"
 ```
 
-### 方式 3：手动安装
-
-```bash
-git clone https://github.com/KevPH2026/x-algorithm-explorer.git
-cd x-algorithm-explorer
-./install.sh
+### 优化现有内容
+```
+"优化这个帖子让它能火"
+"viral 优化: [粘贴你的内容]"
 ```
 
-## 📚 功能特性
-
-### 架构理解
-- **数据服务层**: tweetypie, unified-user-actions, user-signal-service
-- **机器学习模型**: SimClusters, TwHIN, heavy-ranker, real-graph
-- **候选源**: search-index, UTEG (GraphJet), FRS
-- **产品层**: home-mixer, pushservice, tweet-mixer
-
-### 快速导航
-- 组件概览和详细说明
-- For You Timeline 构建流程
-- 基于图结构的推荐分析
-- 内容过滤机制
-
-## 🎯 使用方法
-
-安装后，在你的 OpenClaw Agent 会话中可以直接提问：
-
-### 架构问题
-- "解释一下 X 的推荐算法整体架构"
-- "SimClusters 是什么？如何工作？"
-- "For You Timeline 是怎么构建的？"
-
-### 组件分析
-- "给我讲讲 home-mixer 的作用"
-- "GraphJet 是如何做实时推荐的？"
-- "heavy-ranker 用了什么神经网络模型？"
-
-### 代码导航
-- "找到 TwHIN 相关的代码位置"
-- "解释 visibility filters 的实现"
-- "UTEG 是什么缩写？"
-
-## 🏗️ For You Timeline 流程
-
+### 蹭热点流量
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    For You Timeline                         │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  1. 候选获取 (Candidate Sourcing)                          │
-│     ├─ search-index: In-Network ~50%                       │
-│     ├─ UTEG (GraphJet): Out-of-Network                     │
-│     └─ FRS: 账户推荐                                        │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  2. 轻量排序 (Light Ranking)                               │
-│     └─ earlybird 初步筛选                                   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  3. 重量排序 (Heavy Ranking)                               │
-│     └─ 神经网络打分 (heavy-ranker)                         │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  4. 混合与过滤 (Mixing & Filtering)                        │
-│     ├─ home-mixer 混合多种来源                              │
-│     └─ visibility-filters 内容过滤                          │
-└─────────────────────────────────────────────────────────────┘
+"蹭 [热点事件] 的流量"
+"为 [话题] 设计 viral 内容"
 ```
 
-## 📁 核心组件
+## ✨ 核心功能
 
-### 机器学习模型
-
-| 模型 | 描述 |
+| 功能 | 说明 |
 |------|------|
-| **SimClusters** | 社区检测和稀疏嵌入，用于兴趣建模 |
-| **TwHIN** | 密集知识图谱嵌入，用户和帖子表示 |
-| **Real Graph** | 预测用户之间交互的可能性 |
-| **Tweepcred** | 基于 PageRank 的用户声誉算法 |
-| **Heavy Ranker** | 神经网络，用于候选帖子最终排序 |
+| 🚀 **Viral Post 生成** | 基于算法偏好，一键生成高流量帖子 |
+| 📝 **内容优化** | 分析并优化已有内容，提升传播概率 |
+| 🔥 **热点追踪** | 识别当前算法偏好的话题类型 |
+| 🎣 **Hook 生成器** | 生成前 3 秒抓眼球的开头 |
+| 🧵 **Thread 设计** | 优化多 tweet 结构，提升停留时间 |
+| ⏰ **时间建议** | 最佳发布时间推荐 |
 
-### 候选源
+## 📊 X 算法核心洞察
 
-| 来源 | 占比 | 说明 |
+### 算法偏好的内容特征
+
+| 特征 | 说明 | 策略 |
 |------|------|------|
-| **search-index** | ~50% | In-Network 帖子索引 |
-| **UTEG** | ~50% | User-Tweet Entity Graph，GraphJet 驱动 |
-| **FRS** | - | Follow Recommendation Service |
+| **停留时间** | 用户阅读时长是关键指标 | Thread 结构、悬念设计 |
+| **互动信号** | 回复 > 转发 > 点赞 | 评论区互动设计 |
+| **时间衰减** | 新内容优先 | 实时热点蹭流量 |
+| **个性化** | 基于用户兴趣图谱 | 标签精准匹配 |
 
-### 数据服务
-
-| 服务 | 功能 |
-|------|------|
-| **tweetypie** | 帖子数据核心读写服务 |
-| **unified-user-actions** | 用户行为实时流处理 |
-| **user-signal-service** | 显式信号（点赞、回复）和隐式信号（点击、停留） |
-
-## 📂 项目结构
+### Viral Formula
 
 ```
-x-algorithm-explorer/
-├── SKILL.md                    # Skill 定义（OpenClaw 读取）
+Viral Score = Hook (30%) + Value (40%) + Engagement (20%) + Timing (10%)
+```
+
+## 🎯 使用示例
+
+### 示例 1：生成 Viral Thread
+
+**你说：** `"关于 AI coding 的 viral 帖子"`
+
+**Agent 输出：**
+```
+🚀 VIRAL POST GENERATED
+
+【Thread 内容】
+1/ 我花了 6 个月学会编程。
+上周用 AI 写代码，6 小时完成了同样的项目。
+
+这是我在 X 上学到的 7 个 AI 编程技巧 👇
+
+2/ [技巧1]...
+...
+
+【算法优化点】
+✅ Thread 结构（多 tweet = 更多停留时间）
+✅ 数字开头（高点击率）
+✅ 对比冲突（情感共鸣）
+✅ 互动引导（评论区提问）
+
+【最佳发布时间】
+📅 周二/周四 上午 9-11 AM EST
+📊 预估互动率: +150%
+
+【标签建议】
+#AI #Coding #ViralTips #BuildInPublic
+```
+
+### 示例 2：优化现有内容
+
+**你说：** `"viral 优化: 我们发布了一个新产品，欢迎大家试用"`
+
+**Agent 输出：**
+```
+🔍 CONTENT ANALYSIS
+
+【原内容评分】流量潜力: 2/10 ❌
+
+【问题诊断】
+❌ 无 Hook（平淡开场）
+❌ 无价值承诺
+❌ 无情感共鸣
+❌ 无互动设计
+
+【Viral 改写版本】
+
+版本 A (数据对比型):
+"上线 48 小时，1000+ 用户，0 行代码。
+
+我们做了一个不用编程就能构建 AI 应用的工具。
+
+你想用它做什么？👇"
+
+【预计效果】
+改写后流量潜力: 8/10 ✅
+预估互动提升: +300%
+```
+
+### 示例 3：热点蹭流量
+
+**你说：** `"蹭 OpenAI 新发布的流量"`
+
+**Agent 输出：**
+```
+🔥 TRENDING OPPORTUNITY
+
+【热点分析】
+话题: OpenAI 发布 GPT-5
+热度: 🔥🔥🔥🔥🔥 (极高)
+最佳切入时间: 发布后 2-6 小时
+
+【Viral 切入角度】
+
+角度 1 (快速总结):
+"GPT-5 发布了，5 分钟看完重点:
+
+1. ...
+2. ...
+...
+
+你最想用哪个功能？"
+
+【发布策略】
+⏰ 最佳时间: 发布后 3 小时
+📊 预估曝光: 10万+
+```
+
+## 🎨 Hook 模板
+
+### 数字对比型
+- "X 年前我 ____，现在我 ____"
+- "用了 X 天 ____，结果 ____"
+- "X% 的人不知道 ____"
+
+### 反常识型
+- "不要再 ____ 了"
+- "____ 是个谎言"
+- "____ 正在毁掉你"
+
+### 个人故事型
+- "我被 ____ 了"
+- "上周我 ____"
+- "X 年前我不信 ____, 现在我 ____"
+
+### 问题悬念型
+- "为什么 ____?"
+- "____ 的秘密是什么?"
+- "如果 ____ 怎么办?"
+
+## 📅 最佳发布时间
+
+| 类型 | 最佳时间 |
+|------|---------|
+| B2B 内容 | 周二-周四 9-11 AM EST |
+| 娱乐内容 | 晚上 8-10 PM EST |
+| 热点跟进 | 发布后 2-6 小时内 |
+| Thread | 上午发布 |
+
+## 📁 项目结构
+
+```
+x-viral-engine/
+├── SKILL.md                    # Skill 定义
 ├── README.md                   # 本文件
-├── install.sh                  # 一键安装脚本 ⭐
+├── install.sh                  # 一键安装 ⭐
 ├── package.sh                  # 打包脚本
-├── x-algorithm-explorer.skill  # 打包后的技能文件
-├── references/                 # 知识库文档
-│   ├── README.md              # X 算法完整概述
-│   ├── home-mixer.md          # 时间线服务详解
-│   ├── product-mixer.md       # Feed 框架说明
-│   └── RETREIVAL_SIGNALS.md   # 信号系统文档
-└── scripts/                   # 工具脚本
-    └── explore.py             # 代码导航助手
+├── references/
+│   ├── X_ALGORITHM_INSIGHTS.md # 算法反向工程
+│   ├── VIRAL_TEMPLATES.md      # Viral 内容模板
+│   └── HOOK_LIBRARY.md         # Hook 模板库
+├── templates/
+│   ├── thread_templates/       # Thread 结构模板
+│   ├── single_tweet/           # 单条推文模板
+│   └── engagement_hooks/       # 互动设计模板
+└── examples/
+    └── viral_examples.md       # 成功案例
 ```
 
 ## 🔧 开发
@@ -150,23 +216,22 @@ x-algorithm-explorer/
 ./package.sh
 ```
 
-生成 `x-algorithm-explorer-2.0.0.skill` 文件，可用于分发。
+生成 `x-viral-engine-3.0.0.skill` 文件。
 
 ### 本地测试
 
 ```bash
-# 安装到本地 OpenClaw
-cp -r . ~/.openclaw/skills/x-algorithm-explorer
-
-# 测试 Skill 是否加载
+cp -r . ~/.openclaw/skills/x-viral-engine
 openclaw skills list
 ```
 
-## 📖 参考资料
+## 📖 原理
 
-- [X Engineering Blog - Algorithm Open Source](https://blog.x.com/engineering/en_us/topics/open-source/2023/twitter-recommendation-algorithm)
-- [Original Repository - the-algorithm](https://github.com/twitter/the-algorithm)
-- [Open Source Announcement](https://blog.x.com/en_us/topics/company/2023/a-new-era-of-transparency-for-twitter)
+这个 Skill 基于对 X (Twitter) 开源推荐算法的深度分析：
+
+1. **算法理解** - 解析 X 的 home-mixer、heavy-ranker、GraphJet 等核心组件
+2. **反向工程** - 推导出算法偏好的内容特征
+3. **内容生成** - 基于这些特征生成高传播概率的内容
 
 ## 🤝 贡献
 
@@ -174,10 +239,10 @@ openclaw skills list
 
 ## 📄 许可证
 
-本项目参考 X Algorithm 代码库，遵循 [AGPL-3.0](LICENSE) 许可证。
+[AGPL-3.0](LICENSE)
 
 ---
 
 <p align="center">
-  Made with ❤️ for OpenClaw Agents
+  Made with ❤️ for Viral Content Creators
 </p>
